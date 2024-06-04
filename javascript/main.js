@@ -1,33 +1,12 @@
-/** *
- * NOTE: Feel free to add any extra member variables/functions you like.
- */
-export class IntensitySegments {
-    /**
-     *
-     */
-    add(from, to, amount) {
-        // TODO: implement this
-    }
-    /** 
-     *
-     */
-    set(from, to, amount) {
-        // TODO: implement this
-    }
-    /** 
-     *
-     */
-    toString() {
-        // TODO: implement this
-    }
-}
-
 
 // Here is an example sequence:
 // (data stored as an array of start point and value for each segment.) 
 
+const IntensitySegments = require("./intensity-segments.js");
+
 const segments1 = new IntensitySegments();
 segments1.toString(); // Should be "[]"
+
 segments1.add(10, 30, 1);
 segments1.toString(); // Should be: "[[10,1],[30,0]]"
 segments1.add(20, 40, 1);
