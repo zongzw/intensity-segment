@@ -9,6 +9,47 @@ import (
 //
 //	$ go test . -v
 
+// TestIntensitySegments_setadd test IntensitySegments.add/set mixed
+func TestIntensitySegments_setadd(t *testing.T) {
+	var a string
+	segments1 := NewIntensitySegments()
+	a = segments1.dumps() // Should be "[]"
+	assertFailure(t, a, "[]")
+
+	segments1.add(10, 30, 1)
+	a = segments1.dumps() // Should be: "[[10,1],[30,0]]"
+	assertFailure(t, a, "[[10 1] [30 0]]")
+
+	segments1.add(20, 40, 1)
+	a = segments1.dumps() // Should be: "[[10,1],[20,2],[30,1],[40,0]]"
+	assertFailure(t, a, "[[10 1] [20 2] [30 1] [40 0]]")
+
+	segments1.add(10, 40, -2)
+	a = segments1.dumps() // Should be: "[[10,-1],[20,0],[30,-1],[40,0]]"
+	assertFailure(t, a, "[[10 -1] [20 0] [30 -1] [40 0]]")
+
+	// Another example sequence:
+	segments2 := NewIntensitySegments()
+	a = segments2.dumps() // Should be "[]"
+	assertFailure(t, a, "[]")
+
+	segments2.add(10, 30, 1)
+	a = segments2.dumps() // Should be "[[10,1],[30,0]]"
+	assertFailure(t, a, "[[10 1] [30 0]]")
+
+	segments2.add(20, 40, 1)
+	a = segments2.dumps() // Should be "[[10,1],[20,2],[30,1],[40,0]]"
+	assertFailure(t, a, "[[10 1] [20 2] [30 1] [40 0]]")
+
+	segments2.add(10, 40, -1)
+	a = segments2.dumps() // Should be "[[20,1],[30,0]]"
+	assertFailure(t, a, "[[20 1] [30 0]]")
+
+	segments2.add(10, 40, -1)
+	a = segments2.dumps() // Should be "[[10,-1],[20,0],[30,-1],[40,0]]"
+	assertFailure(t, a, "[[10 -1] [20 0] [30 -1] [40 0]]")
+}
+
 // TestIntensitySegments_set Test IntensitySegments.set
 //
 //	Notice the comments:
@@ -84,5 +125,11 @@ func IntensitySegments_add_tmpl(t *testing.T, f1, t1, a1, f2, t2, a2 int, expect
 	b := expected
 	if !reflect.DeepEqual(a, b) {
 		t.Errorf("assert failure: a: %v, b: %v", a, b)
+	}
+}
+
+func assertFailure(t *testing.T, a, b string) {
+	if a != b {
+		t.Errorf("\nActually: %s\nExpected: %s\n", a, b)
 	}
 }

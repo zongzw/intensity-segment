@@ -100,6 +100,23 @@ func (is *IntensitySegments) merge() {
 		return
 	}
 
+	// clear prefix 0
+	i := 0
+	for ; i < len(keys) && is.it[keys[i]] == 0; i++ {
+		delete(is.it, keys[i])
+	}
+	keys = keys[i:]
+
+	for i = len(keys) - 1; i >= 0; i-- {
+		if is.it[keys[i]] == 0 {
+			if i-1 >= 0 && is.it[keys[i-1]] == 0 {
+				delete(is.it, keys[i])
+				keys = append(keys[0:i], keys[i+1:]...)
+			}
+		}
+
+	}
+
 	// clear the surffix segment with same intensity <> 0
 	lastIntensity := is.it[keys[0]]
 	for i := 1; i < len(keys); i++ {
