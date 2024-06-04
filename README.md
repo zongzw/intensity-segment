@@ -5,6 +5,7 @@
 This repository presents IntensitySegements problem and solution in golang and javascript.
 
 Find the details in the separate folders.
+*The golang edition is well auto unit-tested and commented.*
 
 ## Problem Description
 

@@ -15,7 +15,7 @@ segments1.add(10, 40, -2);
 segments1.toString(); // Should be: "[[10,-1],[20,0],[30,-1],[40,0]]"
 
 // Another example sequence:
-const segments2 = new IntensitySegments(); 
+const segments2 = new IntensitySegments();
 segments2.toString(); // Should be "[]"
 segments2.add(10, 30, 1);
 segments2.toString(); // Should be "[[10,1],[30,0]]"
