@@ -5,6 +5,10 @@ import (
 	"testing"
 )
 
+// run this file with:
+//
+//	$ go test . -v
+
 // TestIntensitySegments_set Test IntensitySegments.set
 //
 //	Notice the comments:
